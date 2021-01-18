@@ -46,5 +46,15 @@ class InventoryTest {
 		assertEquals(true, isRemoved);
 	}
 	
+	@Test
+	void removeNotExistingItemFromInventoryReturnsFalse() {
+		boolean isRemoved = inventory.removeItem(Coin.PENNY);
+		List<Coin> coins = inventory.getItems();
+		assertEquals(0, coins.size());
+		assertEquals(false, isRemoved);
+	}
+	
+	
+	
 
 }
