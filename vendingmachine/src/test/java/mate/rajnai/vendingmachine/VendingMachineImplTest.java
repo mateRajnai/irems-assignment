@@ -9,6 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import mate.rajnai.vendingmachine.inventory.CoinInventorySupplier;
+import mate.rajnai.vendingmachine.inventory.ProductInventorySupplier;
+
 class VendingMachineImplTest {
 	
 	private VendingMachine vendingMachine;

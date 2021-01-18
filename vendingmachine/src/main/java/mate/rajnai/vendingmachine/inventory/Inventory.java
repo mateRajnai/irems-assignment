@@ -1,4 +1,4 @@
-package mate.rajnai.vendingmachine;
+package mate.rajnai.vendingmachine.inventory;
 
 import java.util.ArrayList;
 import java.util.List;

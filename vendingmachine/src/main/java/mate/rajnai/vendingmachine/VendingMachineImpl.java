@@ -2,6 +2,9 @@ package mate.rajnai.vendingmachine;
 
 import java.util.ArrayList;
 
+import mate.rajnai.vendingmachine.inventory.Inventory;
+import mate.rajnai.vendingmachine.inventory.InventorySupplier;
+
 public class VendingMachineImpl implements VendingMachine {
 	
 	private Inventory<Product> availableProducts = new Inventory<Product>();
