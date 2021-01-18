@@ -6,4 +6,6 @@ public interface VendingMachine {
 
 	void insertCoin(Coin coin);
 
+	Purchase buyProductAndReturnChangesIfAny(Product product);
+
 }
