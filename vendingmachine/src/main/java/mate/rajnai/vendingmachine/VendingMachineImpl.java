@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 public class VendingMachineImpl implements VendingMachine {
 	
-	private Inventory<Product> availableProducts;
-	private Inventory<Coin> availableCoins;
+	private Inventory<Product> availableProducts = new Inventory<Product>();
+	private Inventory<Coin> availableCoins = new Inventory<Coin>();
 	private int insertedMoneyOfCurrentPurchase;
+	
+	VendingMachineImpl(InventorySupplier<Product> productInventorySupplier, InventorySupplier<Coin> coinInventorySupplier) {
+		productInventorySupplier.fillUp(this.availableProducts);
+		coinInventorySupplier.fillUp(this.availableCoins);
+	}
 
 	@Override
 	public int getInsertedMoneyOfCurrentPurchase() {
