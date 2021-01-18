@@ -27,9 +27,13 @@ class VendingMachineImplTest {
 	void insertFourCoinsInOnePurchase() {
 		vendingMachine.insertCoin(Coin.PENNY);
 		vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.QUARTER);
 		int insertedMoneyOfCurrentPurchase = vendingMachine.getInsertedMoneyOfCurrentPurchase();
-		assertEquals(6, insertedMoneyOfCurrentPurchase);
+		assertEquals(41, insertedMoneyOfCurrentPurchase);
 	}
+	
+	
 
 	
 
