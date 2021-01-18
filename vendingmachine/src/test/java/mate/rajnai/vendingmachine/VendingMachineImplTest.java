@@ -56,6 +56,13 @@ class VendingMachineImplTest {
 			});
 	}
 	
-
+	@Test
+	void afterBuyingProductInsertedMoneyOfCurrentPurchaseIsZero() {
+		vendingMachine.insertCoin(Coin.PENNY);
+		Product product = Product.SODA;
+		vendingMachine.buyProductAndReturnChangesIfAny(product);
+		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
+		assertEquals(0, insertedMoney);
+	}
 
 }

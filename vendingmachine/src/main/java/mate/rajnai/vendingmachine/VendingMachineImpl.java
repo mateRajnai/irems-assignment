@@ -28,8 +28,10 @@ public class VendingMachineImpl implements VendingMachine {
 
 	@Override
 	public Purchase buyProductAndReturnChangesIfAny(Product product) {
-		if(this.availableProducts.removeItem(product)) 
+		if(this.availableProducts.removeItem(product)) {
+			this.insertedMoneyOfCurrentPurchase = 0;
 			return new Purchase(product, new ArrayList<Coin>());
+		}
 		else
 			throw new ProductIsOutOfRunException(product.getName() + " is out of run!");
 	}
