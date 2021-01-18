@@ -29,5 +29,13 @@ class InventoryTest {
 		assertEquals(1, coins.size());
 	}
 	
+	@Test
+	void addTwoItemsToInventory() {
+		inventory.add(Coin.PENNY);
+		inventory.add(Coin.PENNY);
+		List<Coin> coins = inventory.getItems();
+		assertEquals(2, coins.size());
+	}
+	
 
 }
