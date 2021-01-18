@@ -1,6 +1,7 @@
 package mate.rajnai.vendingmachine;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mate.rajnai.vendingmachine.inventory.Inventory;
 import mate.rajnai.vendingmachine.inventory.InventorySupplier;
@@ -9,6 +10,7 @@ public class VendingMachineImpl implements VendingMachine {
 	
 	private Inventory<Product> availableProducts = new Inventory<Product>();
 	private Inventory<Coin> availableCoins = new Inventory<Coin>();
+	private Inventory<Coin> insertedCoinsOfCurrentPurchase = new Inventory<Coin>();
 	private int insertedMoneyOfCurrentPurchase;
 	
 	VendingMachineImpl(InventorySupplier<Product> productInventorySupplier, InventorySupplier<Coin> coinInventorySupplier) {
@@ -23,7 +25,8 @@ public class VendingMachineImpl implements VendingMachine {
 
 	@Override
 	public void insertCoin(Coin coin) {
-		insertedMoneyOfCurrentPurchase += coin.getValue();	
+		this.insertedMoneyOfCurrentPurchase += coin.getValue();
+		this.insertedCoinsOfCurrentPurchase.addItem(coin);
 	}
 
 	@Override
@@ -37,6 +40,11 @@ public class VendingMachineImpl implements VendingMachine {
 		}
 		else
 			throw new ProductIsOutOfRunException(product.getName() + " is out of run!");
+	}
+
+	@Override
+	public List<Coin> takeRefund() {
+		return this.insertedCoinsOfCurrentPurchase.removeItems();
 	}
 	
 	
