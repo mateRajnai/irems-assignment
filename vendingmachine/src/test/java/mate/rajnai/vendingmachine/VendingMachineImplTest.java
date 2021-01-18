@@ -75,5 +75,14 @@ class VendingMachineImplTest {
 		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
 		assertEquals(0, insertedMoney);
 	}
+	
+	@Test
+	void takeRefund() {
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		List<Coin> coins = vendingMachine.takeRefund();
+		assertEquals(Coin.DIME, coins.get(0));
+		assertEquals(Coin.QUARTER, coins.get(1));
+	}
 
 }
