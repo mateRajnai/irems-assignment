@@ -11,7 +11,7 @@ public class Inventory<T> {
 		return items;
 	}
 
-	public void add(T t) {
+	public void addItem(T t) {
 		items.add(t);
 	}
 	
