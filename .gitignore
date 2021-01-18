@@ -1,3 +1,4 @@
 .git
 vendingmachine/.settings
 vendingmachine/target
+!vendingmachine/src
