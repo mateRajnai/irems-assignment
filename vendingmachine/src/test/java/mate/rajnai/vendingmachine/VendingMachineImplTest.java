@@ -41,8 +41,7 @@ class VendingMachineImplTest {
 	
 	@Test
 	void canBuyProductAndNoChangesHaveToBeReturned() {
-		Product product = Product.SODA;
-		vendingMachine.insertCoin(Coin.QUARTER);
+		Product product = Product.COKE;
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Purchase purchase = vendingMachine.buyProductAndReturnChangesIfAny(product);
 		assertEquals(product, purchase.getProduct());
@@ -60,7 +59,8 @@ class VendingMachineImplTest {
 	@Test
 	void canNotBuyProductThrowsProductIsOutOfRunException() {
 		vendingMachine.insertCoin(Coin.QUARTER);
-		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.QUARTER);
+		Product product = Product.PEPSI;
 		assertThrows(ProductIsOutOfRunException.class, () -> {
 			vendingMachine.buyProductAndReturnChangesIfAny(product);
 			});
@@ -69,8 +69,7 @@ class VendingMachineImplTest {
 	@Test
 	void afterBuyingProductInsertedMoneyOfCurrentPurchaseIsZero() {
 		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		Product product = Product.SODA;
+		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
 		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
 		assertEquals(0, insertedMoney);
@@ -87,9 +86,8 @@ class VendingMachineImplTest {
 	
 	@Test
 	void afterBuyingProductTakeRefundReturnsZeroCoins() {
-		Product product = Product.SODA;
 		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
 		List<Coin> coins = vendingMachine.takeRefund();
 		assertEquals(0, coins.size());
