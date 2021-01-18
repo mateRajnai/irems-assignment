@@ -39,13 +39,20 @@ class VendingMachineImplTest {
 	}
 	
 	
-	
 	@Test
 	void canBuyProductAndNoChangesHaveToBeReturned() {
 		Product product = Product.SODA;
 		Purchase purchase = vendingMachine.buyProductAndReturnChangesIfAny(product);
 		assertEquals(product, purchase.getProduct());
 		assertEquals(0, purchase.getChange().size());
+	}
+	
+	@Test
+	void canNotBuyProductThrowsNotEnoughCoinIsInsertedException() {
+		Product product = Product.COKE;
+		assertThrows(NotEnoughCoinIsInsertedException.class, () -> {
+			vendingMachine.buyProductAndReturnChangesIfAny(product);
+			});
 	}
 	
 	@Test
