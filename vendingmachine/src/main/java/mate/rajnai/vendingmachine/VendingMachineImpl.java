@@ -36,6 +36,8 @@ public class VendingMachineImpl implements VendingMachine {
 		}
 		if(this.availableProducts.removeItem(product)) {
 			this.insertedMoneyOfCurrentPurchase = 0;
+			List<Coin> coinsToBeAddedToAvailableCoins = this.insertedCoinsOfCurrentPurchase.clearItems();
+			this.availableCoins.addItems(coinsToBeAddedToAvailableCoins);
 			return new Purchase(product, new ArrayList<Coin>());
 		}
 		else

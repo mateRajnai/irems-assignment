@@ -84,5 +84,15 @@ class VendingMachineImplTest {
 		assertEquals(Coin.DIME, coins.get(0));
 		assertEquals(Coin.QUARTER, coins.get(1));
 	}
+	
+	@Test
+	void afterBuyingProductTakeRefundReturnsZeroCoins() {
+		Product product = Product.SODA;
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.buyProductAndReturnChangesIfAny(product);
+		List<Coin> coins = vendingMachine.takeRefund();
+		assertEquals(0, coins.size());
+	}
 
 }
