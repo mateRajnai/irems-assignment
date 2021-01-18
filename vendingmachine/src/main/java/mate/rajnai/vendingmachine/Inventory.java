@@ -14,6 +14,11 @@ public class Inventory<T> {
 	public void addItem(T t) {
 		items.add(t);
 	}
+
+	public boolean removeItem(T t) {
+		return items.remove(t);
+
+	}
 	
 	
 
