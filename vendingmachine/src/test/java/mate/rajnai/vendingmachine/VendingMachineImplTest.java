@@ -18,7 +18,7 @@ class VendingMachineImplTest {
 	
 	@BeforeEach
 	void init() {
-		vendingMachine = new VendingMachineImpl(new ProductInventorySupplier(), new CoinInventorySupplier());
+		vendingMachine = new VendingMachineImpl(new TestProductInventorySupplier(), new CoinInventorySupplier());
 	}
 	
 	@Test
