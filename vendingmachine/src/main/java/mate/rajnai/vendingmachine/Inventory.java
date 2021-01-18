@@ -17,9 +17,6 @@ public class Inventory<T> {
 
 	public boolean removeItem(T t) {
 		return items.remove(t);
-
 	}
 	
-	
-
 }
