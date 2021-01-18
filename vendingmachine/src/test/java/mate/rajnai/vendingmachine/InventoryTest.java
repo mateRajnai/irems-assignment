@@ -37,5 +37,14 @@ class InventoryTest {
 		assertEquals(2, coins.size());
 	}
 	
+	@Test
+	void removeExistingItemFromInventory() {
+		inventory.addItem(Coin.PENNY);
+		boolean isRemoved = inventory.removeItem(Coin.PENNY);
+		List<Coin> coins = inventory.getItems();
+		assertEquals(0, coins.size());
+		assertEquals(true, isRemoved);
+	}
+	
 
 }
