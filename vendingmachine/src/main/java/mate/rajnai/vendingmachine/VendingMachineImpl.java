@@ -28,6 +28,9 @@ public class VendingMachineImpl implements VendingMachine {
 
 	@Override
 	public Purchase buyProductAndReturnChangesIfAny(Product product) {
+		if (this.insertedMoneyOfCurrentPurchase < product.getPrice()) {
+			throw new NotEnoughCoinIsInsertedException("Inserted coin is less than product's price!");
+		}
 		if(this.availableProducts.removeItem(product)) {
 			this.insertedMoneyOfCurrentPurchase = 0;
 			return new Purchase(product, new ArrayList<Coin>());
