@@ -41,7 +41,7 @@ class VendingMachineImplTest {
 	
 	
 	@Test
-	void canBuyProductAndNoChangesHaveToBeReturned() {
+	void canBuyProductAndNoChangeHaveToBeReturned() {
 		Product product = Product.COKE;
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Purchase purchase = vendingMachine.buyProductAndReturnChangesIfAny(product);
@@ -75,6 +75,8 @@ class VendingMachineImplTest {
 		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
 		assertEquals(0, insertedMoney);
 	}
+	
+
 	
 	@Test
 	void takeRefund() {
