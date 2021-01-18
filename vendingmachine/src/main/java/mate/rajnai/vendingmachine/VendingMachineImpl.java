@@ -1,5 +1,7 @@
 package mate.rajnai.vendingmachine;
 
+import java.util.ArrayList;
+
 public class VendingMachineImpl implements VendingMachine {
 	
 	private Inventory<Coin> availableCoins;
@@ -12,8 +14,12 @@ public class VendingMachineImpl implements VendingMachine {
 
 	@Override
 	public void insertCoin(Coin coin) {
-		insertedMoneyOfCurrentPurchase += coin.getValue();
-		
+		insertedMoneyOfCurrentPurchase += coin.getValue();	
+	}
+
+	@Override
+	public Purchase buyProductAndReturnChangesIfAny(Product product) {
+		return new Purchase(product, new ArrayList<Coin>());
 	}
 	
 	
