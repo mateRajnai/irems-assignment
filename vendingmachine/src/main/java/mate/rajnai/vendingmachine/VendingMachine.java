@@ -4,4 +4,6 @@ public interface VendingMachine {
 
 	int getInsertedMoneyOfCurrentPurchase();
 
+	void insertCoin(Coin coin);
+
 }
