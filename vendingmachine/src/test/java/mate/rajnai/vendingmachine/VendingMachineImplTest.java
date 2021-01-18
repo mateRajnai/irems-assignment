@@ -43,8 +43,6 @@ class VendingMachineImplTest {
 		Purchase purchase = vendingMachine.buyProductAndReturnChangesIfAny(product);
 		assertEquals(product, purchase.getProduct());
 		assertEquals(0, purchase.getChange().size());
-		
-		
 	}
 	
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class VendingMachineImpl implements VendingMachine {
 	
+	private Inventory<Product> availableProducts;
 	private Inventory<Coin> availableCoins;
 	private int insertedMoneyOfCurrentPurchase;
 
@@ -19,7 +20,9 @@ public class VendingMachineImpl implements VendingMachine {
 
 	@Override
 	public Purchase buyProductAndReturnChangesIfAny(Product product) {
-		return new Purchase(product, new ArrayList<Coin>());
+		if(this.availableProducts.removeItem(product)) 
+			return new Purchase(product, new ArrayList<Coin>());
+		return null;
 	}
 	
 	
