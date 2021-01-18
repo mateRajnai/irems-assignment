@@ -8,15 +8,22 @@ public class Inventory<T> {
 	private List<T> items = new ArrayList<T>();
 
 	public List<T> getItems() {
-		return items;
+		return this.items;
 	}
 
 	public void addItem(T t) {
-		items.add(t);
+		this.items.add(t);
 	}
 
 	public boolean removeItem(T t) {
-		return items.remove(t);
+		return this.items.remove(t);
+	}
+
+	public List<T> clearItems() {
+		List<T> itemsToBeReturned = new ArrayList<T>(this.items);
+		this.items = new ArrayList<T>();
+		return itemsToBeReturned;
+		
 	}
 	
 }
