@@ -38,7 +38,7 @@ class InventoryTest {
 	}
 	
 	@Test
-	void removeExistingItemFromInventory() {
+	void removeExistingItemFromInventoryReturnsTrue() {
 		inventory.addItem(Coin.PENNY);
 		boolean isRemoved = inventory.removeItem(Coin.PENNY);
 		List<Coin> coins = inventory.getItems();
