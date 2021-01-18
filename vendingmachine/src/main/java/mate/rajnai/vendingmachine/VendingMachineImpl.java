@@ -30,7 +30,8 @@ public class VendingMachineImpl implements VendingMachine {
 	public Purchase buyProductAndReturnChangesIfAny(Product product) {
 		if(this.availableProducts.removeItem(product)) 
 			return new Purchase(product, new ArrayList<Coin>());
-		return null;
+		else
+			throw new ProductIsOutOfRunException(product.getName() + " is out of run!");
 	}
 	
 	
