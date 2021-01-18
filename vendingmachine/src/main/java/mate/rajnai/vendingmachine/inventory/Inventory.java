@@ -3,6 +3,8 @@ package mate.rajnai.vendingmachine.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import mate.rajnai.vendingmachine.Coin;
+
 public class Inventory<T> {
 	
 	private List<T> items = new ArrayList<T>();
@@ -23,7 +25,13 @@ public class Inventory<T> {
 		List<T> itemsToBeReturned = new ArrayList<T>(this.items);
 		this.items = new ArrayList<T>();
 		return itemsToBeReturned;
+	}
+
+	public void addItems(List<T> itemsToBeAddedToOtherInventory) {
+		this.items.addAll(itemsToBeAddedToOtherInventory);
 		
 	}
+	
+	
 	
 }

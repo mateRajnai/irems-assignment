@@ -65,7 +65,15 @@ class InventoryTest {
 		assertEquals(0, inventory.getItems().size());
 	}
 
-
+	@Test
+	void addItems() {
+		inventory.addItem(Coin.PENNY);
+		inventory.addItem(Coin.PENNY);
+		Inventory<Coin> otherInventory = new Inventory<Coin>();
+		List<Coin> coins = inventory.getItems();
+		otherInventory.addItems(coins);
+		assertEquals(2, otherInventory.getItems().size());
+	}
 	
 	
 	
