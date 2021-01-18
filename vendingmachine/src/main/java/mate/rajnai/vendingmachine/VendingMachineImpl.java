@@ -44,7 +44,7 @@ public class VendingMachineImpl implements VendingMachine {
 
 	@Override
 	public List<Coin> takeRefund() {
-		return this.insertedCoinsOfCurrentPurchase.removeItems();
+		return this.insertedCoinsOfCurrentPurchase.clearItems();
 	}
 	
 	
