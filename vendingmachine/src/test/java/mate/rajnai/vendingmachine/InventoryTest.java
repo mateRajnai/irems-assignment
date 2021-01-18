@@ -53,8 +53,8 @@ class InventoryTest {
 		assertEquals(0, coins.size());
 		assertEquals(false, isRemoved);
 	}
-	
-	
-	
 
+	
+	
+	
 }
