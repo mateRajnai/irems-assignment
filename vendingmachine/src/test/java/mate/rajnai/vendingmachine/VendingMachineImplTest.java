@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import mate.rajnai.vendingmachine.inventory.CoinInventorySupplier;
 import mate.rajnai.vendingmachine.inventory.ProductInventorySupplier;
+import mate.rajnai.vendingmachine.inventory.TestHelperProductInventorySupplier;
 
 class VendingMachineImplTest {
 	
@@ -18,7 +19,7 @@ class VendingMachineImplTest {
 	
 	@BeforeEach
 	void init() {
-		vendingMachine = new VendingMachineImpl(new TestProductInventorySupplier(), new CoinInventorySupplier());
+		vendingMachine = new VendingMachineImpl(new TestHelperProductInventorySupplier(), new CoinInventorySupplier());
 	}
 	
 	@Test
