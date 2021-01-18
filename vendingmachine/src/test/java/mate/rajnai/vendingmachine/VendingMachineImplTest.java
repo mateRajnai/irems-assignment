@@ -48,6 +48,14 @@ class VendingMachineImplTest {
 		assertEquals(0, purchase.getChange().size());
 	}
 	
+	@Test
+	void canNotBuyProductThrowsProductIsOutOfRunException() {
+		Product product = Product.COKE;
+		assertThrows(ProductIsOutOfRunException.class, () -> {
+			vendingMachine.buyProductAndReturnChangesIfAny(product);
+			});
+	}
+	
 
 
 }
