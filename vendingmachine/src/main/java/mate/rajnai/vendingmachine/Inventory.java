@@ -10,6 +10,10 @@ public class Inventory<T> {
 	public List<T> getItems() {
 		return items;
 	}
+
+	public void add(T t) {
+		items.add(t);
+	}
 	
 	
 
