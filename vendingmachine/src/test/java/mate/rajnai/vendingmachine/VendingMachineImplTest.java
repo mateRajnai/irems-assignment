@@ -128,5 +128,16 @@ class VendingMachineImplTest {
 		List<Coin> coins = vendingMachine.takeRefund();
 		assertEquals(0, coins.size());
 	}
+	
+	@Test
+	void afterResetInsertedMoneyOfCurrentPurchaseIsZero() {
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		Product product = Product.COKE;
+		vendingMachine.buyProductAndReturnChangesIfAny(product);
+		vendingMachine.reset();
+		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
+		assertEquals(0, insertedMoney);
+	}
 
 }
