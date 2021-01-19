@@ -19,7 +19,7 @@ class ReportingImplTest {
 		vendingMachine.buyProductAndReturnChangesIfAny(Product.COKE);
 		Reporting reporting = new ReportingImpl(vendingMachine);
 		String report = reporting.reportConsumptionByProduct();
-		String expectedReport = "Coke: 1";
+		String expectedReport = "Coke: 1\nPepsi: 0\nSoda: 0\n";
 		assertEquals(expectedReport, report);
 	}
 
