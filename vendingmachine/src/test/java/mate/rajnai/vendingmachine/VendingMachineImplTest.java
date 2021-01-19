@@ -175,7 +175,7 @@ class VendingMachineImplTest {
 	@Test
 	void afterResetAvailableProductsAreReturned() {
 		InventoriesOfVendingMachine productAndCoinInventories = vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
-		List<Product> expectedProucts = new ArrayList<>(Arrays.asList(Product.COKE, Product.SODA));
+		List<Product> expectedProucts = new ArrayList<>(Arrays.asList(Product.COKE, Product.SODA, Product.SODA, Product.SODA));
 		assertEquals(expectedProucts, productAndCoinInventories.getProductInventory().getItems());
 	}
 	

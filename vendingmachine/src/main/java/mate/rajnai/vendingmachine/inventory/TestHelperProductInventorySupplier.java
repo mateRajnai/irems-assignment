@@ -4,10 +4,12 @@ import mate.rajnai.vendingmachine.Product;
 
 public class TestHelperProductInventorySupplier extends ProductInventorySupplier {
 	
-	// This class is for unit testing. One Coke and one Soda must be added to the inventory
+	// This class is for unit testing. One Coke and three Soda must be added to the inventory
 	@Override
 	public void fillUp(Inventory<Product> inventory) {
 		inventory.addItem(Product.COKE);
+		inventory.addItem(Product.SODA);
+		inventory.addItem(Product.SODA);
 		inventory.addItem(Product.SODA);
 	}
 
