@@ -31,6 +31,10 @@ public class Inventory<T> {
 		this.items.addAll(itemsToBeAddedToOtherInventory);
 		
 	}
+
+	public boolean hasItem(T t) {
+		return this.items.parallelStream().filter(item -> item.equals(t)).findFirst().isPresent();
+	}
 	
 	
 	
