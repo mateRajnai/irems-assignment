@@ -85,6 +85,7 @@ public class VendingMachineImpl implements VendingMachine {
 		this.insertedMoneyOfCurrentPurchase = 0;
 		productInventory.addItems(this.availableProducts.clearItems());
 		coinInventory.addItems(this.availableCoins.clearItems());
+		coinInventory.addItems(this.insertedCoinsOfCurrentPurchase.clearItems());
 		return new InventoriesOfVendingMachine(productInventory, coinInventory);
 	}
 	
