@@ -80,6 +80,15 @@ class VendingMachineImplTest {
 	}
 	
 	@Test
+	void afterBuyingProductAddAlsoToConsumedProducts() {
+		vendingMachine.insertCoin(Coin.QUARTER);
+		Product product = Product.COKE;
+		vendingMachine.buyProductAndReturnChangesIfAny(product);
+		List<Product> conumedProducts = vendingMachine.getConsumedProducts();
+		assertEquals(new ArrayList<>(Arrays.asList(product)), conumedProducts);
+	}
+	
+	@Test
 	void canBuyProductAndOneCoinIsReturned() {
 		Product product = Product.COKE;
 		vendingMachine.insertCoin(Coin.DIME);

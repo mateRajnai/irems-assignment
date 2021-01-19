@@ -12,6 +12,7 @@ public class VendingMachineImpl implements VendingMachine {
 	private Inventory<Product> availableProducts = new Inventory<Product>();
 	private Inventory<Coin> availableCoins = new Inventory<Coin>();
 	private Inventory<Coin> insertedCoinsOfCurrentPurchase = new Inventory<Coin>();
+	private List<Product> consumedProducts = new ArrayList<>();
 	
 	VendingMachineImpl(InventorySupplier<Product> productInventorySupplier, InventorySupplier<Coin> coinInventorySupplier) {
 		productInventorySupplier.fillUp(this.availableProducts);
@@ -66,12 +67,13 @@ public class VendingMachineImpl implements VendingMachine {
 					changeAmount -= Coin.PENNY.getValue();
 					continue;
 				} else {
+					this.availableProducts.addItem(product);
 					this.takeRefund();
 					throw new VendingMachineHasNotEnoughChangeException("Not enough change. You've got back your money. Please insert the exact amount of money and select your product again.");
 				}
 				
 			}
-			
+			this.consumedProducts.add(product);
 			return new Purchase(product, coinsAsChange);
 		}
 		else
@@ -89,6 +91,13 @@ public class VendingMachineImpl implements VendingMachine {
 		coinInventory.addItems(this.availableCoins.clearItems());
 		coinInventory.addItems(this.insertedCoinsOfCurrentPurchase.clearItems());
 		return new InventoriesOfVendingMachine(productInventory, coinInventory);
+	}
+
+
+	@Override
+	public List<Product> getConsumedProducts() {
+		return this.consumedProducts ;
+		
 	}
 	
 }
