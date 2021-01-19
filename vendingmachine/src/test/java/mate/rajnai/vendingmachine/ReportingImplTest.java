@@ -39,5 +39,22 @@ class ReportingImplTest {
 		String expectedReport = "Coke: 1\nPepsi: 0\nSoda: 1\n";
 		assertEquals(expectedReport, report);
 	}
+	
+	@Test
+	void reportConsumptionByProduct_threeProductsFromOneType() {
+		InventorySupplier<Product> productSupplier = new TestHelperProductInventorySupplier();
+		InventorySupplier<Coin> coinSupplier = new CoinInventorySupplier();
+		VendingMachine vendingMachine = new VendingMachineImpl(productSupplier, coinSupplier);
+		for (int i = 0; i < 3; i++) {
+			vendingMachine.insertCoin(Coin.QUARTER);
+			vendingMachine.insertCoin(Coin.DIME);
+			vendingMachine.insertCoin(Coin.DIME);
+			vendingMachine.buyProductAndReturnChangesIfAny(Product.SODA);
+		}
+		Reporting reporting = new ReportingImpl(vendingMachine);
+		String report = reporting.reportConsumptionByProduct();
+		String expectedReport = "Coke: 0\nPepsi: 0\nSoda: 3\n";
+		assertEquals(expectedReport, report);
+	}
 
 }
