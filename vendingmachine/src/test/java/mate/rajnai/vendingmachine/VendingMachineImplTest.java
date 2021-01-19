@@ -1,7 +1,5 @@
 package mate.rajnai.vendingmachine;
 
-
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -11,14 +9,18 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import mate.rajnai.vendingmachine.Coin;
+import mate.rajnai.vendingmachine.Product;
+import mate.rajnai.vendingmachine.Purchase;
+import mate.rajnai.vendingmachine.VendingMachine;
+import mate.rajnai.vendingmachine.VendingMachineImpl;
 import mate.rajnai.vendingmachine.exception.NotEnoughCoinIsInsertedException;
 import mate.rajnai.vendingmachine.exception.ProductIsOutOfRunException;
 import mate.rajnai.vendingmachine.exception.VendingMachineHasNotEnoughChangeException;
-import mate.rajnai.vendingmachine.inventory.CoinInventorySupplier;
 import mate.rajnai.vendingmachine.inventory.InventoriesOfVendingMachine;
 import mate.rajnai.vendingmachine.inventory.Inventory;
-import mate.rajnai.vendingmachine.inventory.ProductInventorySupplier;
-import mate.rajnai.vendingmachine.inventory.TestHelperProductInventorySupplier;
+import mate.rajnai.vendingmachine.inventory.supplier.testhelper.TestHelperCoinInventorySupplier;
+import mate.rajnai.vendingmachine.inventory.supplier.testhelper.TestHelperProductInventorySupplier;
 
 class VendingMachineImplTest {
 	
@@ -26,11 +28,11 @@ class VendingMachineImplTest {
 	
 	@BeforeEach
 	void init() {
-		vendingMachine = new VendingMachineImpl(new TestHelperProductInventorySupplier(), new CoinInventorySupplier());
+		vendingMachine = new VendingMachineImpl(new TestHelperProductInventorySupplier(), new TestHelperCoinInventorySupplier());
 	}
 	
 	@Test
-	void insertCoin_Penny() {
+	void insertOneCoin() {
 		vendingMachine.insertCoin(Coin.PENNY);
 		int insertedMoneyOfCurrentPurchase = vendingMachine.getAmountOfInsertedMoneyOfCurrentPurchase();
 		assertEquals(1, insertedMoneyOfCurrentPurchase);
@@ -66,9 +68,9 @@ class VendingMachineImplTest {
 	
 	@Test
 	void canNotBuyProductThrowsProductIsOutOfRunException() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.PEPSI;
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
 		assertThrows(ProductIsOutOfRunException.class, () -> {
 			vendingMachine.buyProductAndReturnChangesIfAny(product);
 			});
@@ -76,8 +78,8 @@ class VendingMachineImplTest {
 	
 	@Test
 	void afterBuyingProductAmountOfInsertedMoneyOfCurrentPurchaseIsZero() {
-		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
 		int insertedMoney = vendingMachine.getAmountOfInsertedMoneyOfCurrentPurchase();
 		assertEquals(0, insertedMoney);
@@ -85,11 +87,11 @@ class VendingMachineImplTest {
 	
 	@Test
 	void afterBuyingProductAlsoAddToConsumedProducts() {
-		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
-		List<Product> conumedProducts = vendingMachine.getConsumedProducts();
-		assertEquals(new ArrayList<>(Arrays.asList(product)), conumedProducts);
+		List<Product> consumedProducts = vendingMachine.getConsumedProducts();
+		assertEquals(new ArrayList<>(Arrays.asList(product)), consumedProducts);
 	}
 	
 	@Test
@@ -124,7 +126,7 @@ class VendingMachineImplTest {
 		assertThrows(VendingMachineHasNotEnoughChangeException.class, 
 				() -> vendingMachine.buyProductAndReturnChangesIfAny(product));
 	}
-	
+
 	@Test
 	void takeRefund() {
 		vendingMachine.insertCoin(Coin.DIME);
@@ -136,8 +138,8 @@ class VendingMachineImplTest {
 	
 	@Test
 	void afterBuyingProductTakeRefundReturnsZeroCoins() {
-		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
 		List<Coin> coins = vendingMachine.takeRefund();
 		assertEquals(0, coins.size());
@@ -153,10 +155,10 @@ class VendingMachineImplTest {
 	
 	@Test
 	void afterResetAvailableCoinsAreReturned() {
+		Product product = Product.COKE;
 		vendingMachine.insertCoin(Coin.PENNY);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
-		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
 		InventoriesOfVendingMachine productAndCoinInventories = vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
 		List<Coin> expectedCoins = new ArrayList<>(Arrays.asList(Coin.QUARTER));
@@ -165,10 +167,10 @@ class VendingMachineImplTest {
 	
 	@Test
 	void afterResetMachineHasNoCoins() {
+		Product product = Product.COKE;
 		vendingMachine.insertCoin(Coin.PENNY);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
-		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
 		vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
 		InventoriesOfVendingMachine productAndCoinInventories = vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
@@ -193,15 +195,10 @@ class VendingMachineImplTest {
 	
 	@Test
 	void afterResetMachineConsumedProductsIsZero() {
-		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
 		vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
 		assertEquals(new ArrayList<>(), vendingMachine.getConsumedProducts());
 	}
-	
-
-
-	
-
 }
