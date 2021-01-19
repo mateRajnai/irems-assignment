@@ -12,6 +12,6 @@ public interface VendingMachine {
 
 	List<Coin> takeRefund();
 
-	Purchase reset();
+	InventoriesOfVendingMachine reset();
 
 }
