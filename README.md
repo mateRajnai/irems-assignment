@@ -1,4 +1,3 @@
-# iREMS Test Task Java No. 5 - Junior Level
 # Design and Implement a Vending Machine
 
 ## Specification
@@ -19,9 +18,11 @@
 5. Your code should be easy to read, understand and ready for modification by other developers if and
 when business logic changes
 
-Please try to follow the TDD principle.
+Please try to follow the TDD principle. (Testing was made using JUnit5.)
 
 ## Technologies
-1. Programming Language: Java 8 or higher
-2. IDE: Eclipse (that's the standard around here)
-3. Advantage: build management system (Gradle or Maven)
+1. Programming Language: Java 11
+2. IDE: Eclipse 
+3. Advantage: build management system (Maven)
+
+
