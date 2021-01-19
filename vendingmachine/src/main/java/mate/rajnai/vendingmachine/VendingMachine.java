@@ -2,6 +2,8 @@ package mate.rajnai.vendingmachine;
 
 import java.util.List;
 
+import mate.rajnai.vendingmachine.inventory.Inventory;
+
 public interface VendingMachine {
 
 	int getInsertedMoneyOfCurrentPurchase();
@@ -12,6 +14,6 @@ public interface VendingMachine {
 
 	List<Coin> takeRefund();
 
-	InventoriesOfVendingMachine reset();
+	InventoriesOfVendingMachine reset(Inventory<Product> productInventory, Inventory<Coin> coinInventory);
 
 }
