@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import mate.rajnai.vendingmachine.inventory.CoinInventorySupplier;
+import mate.rajnai.vendingmachine.inventory.Inventory;
 import mate.rajnai.vendingmachine.inventory.ProductInventorySupplier;
 import mate.rajnai.vendingmachine.inventory.TestHelperProductInventorySupplier;
 
@@ -135,7 +136,7 @@ class VendingMachineImplTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
-		vendingMachine.reset();
+		vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
 		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
 		assertEquals(0, insertedMoney);
 	}
@@ -147,7 +148,7 @@ class VendingMachineImplTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
-		InventoriesOfVendingMachine productAndCoinInventories = vendingMachine.reset();
+		InventoriesOfVendingMachine productAndCoinInventories = vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
 		List<Coin> expectedCoins = new ArrayList<>(Arrays.asList(Coin.QUARTER));
 		assertEquals(expectedCoins, productAndCoinInventories.getCoinInventory().getItems());
 	}
