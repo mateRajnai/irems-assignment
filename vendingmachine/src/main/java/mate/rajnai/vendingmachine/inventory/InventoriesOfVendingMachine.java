@@ -1,13 +1,14 @@
-package mate.rajnai.vendingmachine;
+package mate.rajnai.vendingmachine.inventory;
 
-import mate.rajnai.vendingmachine.inventory.Inventory;
+import mate.rajnai.vendingmachine.Coin;
+import mate.rajnai.vendingmachine.Product;
 
 public class InventoriesOfVendingMachine {
 	
 	private Inventory<Product> productInventory;
 	private Inventory<Coin> coinInventory;
 	
-	InventoriesOfVendingMachine(Inventory<Product> productInventory, Inventory<Coin> coinInventory) {
+	public InventoriesOfVendingMachine(Inventory<Product> productInventory, Inventory<Coin> coinInventory) {
 		this.productInventory = productInventory;
 		this.coinInventory = coinInventory;
 	}

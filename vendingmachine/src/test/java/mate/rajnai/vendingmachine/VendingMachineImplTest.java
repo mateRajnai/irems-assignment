@@ -11,7 +11,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import mate.rajnai.vendingmachine.exception.NotEnoughCoinIsInsertedException;
+import mate.rajnai.vendingmachine.exception.ProductIsOutOfRunException;
+import mate.rajnai.vendingmachine.exception.VendingMachineHasNotEnoughChangeException;
 import mate.rajnai.vendingmachine.inventory.CoinInventorySupplier;
+import mate.rajnai.vendingmachine.inventory.InventoriesOfVendingMachine;
 import mate.rajnai.vendingmachine.inventory.Inventory;
 import mate.rajnai.vendingmachine.inventory.ProductInventorySupplier;
 import mate.rajnai.vendingmachine.inventory.TestHelperProductInventorySupplier;

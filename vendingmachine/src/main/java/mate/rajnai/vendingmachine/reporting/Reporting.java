@@ -1,4 +1,4 @@
-package mate.rajnai.vendingmachine;
+package mate.rajnai.vendingmachine.reporting;
 
 public interface Reporting {
 	

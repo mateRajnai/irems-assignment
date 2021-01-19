@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import mate.rajnai.vendingmachine.inventory.CoinInventorySupplier;
 import mate.rajnai.vendingmachine.inventory.InventorySupplier;
 import mate.rajnai.vendingmachine.inventory.TestHelperProductInventorySupplier;
+import mate.rajnai.vendingmachine.reporting.Reporting;
+import mate.rajnai.vendingmachine.reporting.ReportingImpl;
 
 class ReportingImplTest {
 

@@ -2,6 +2,7 @@ package mate.rajnai.vendingmachine;
 
 import java.util.List;
 
+import mate.rajnai.vendingmachine.inventory.InventoriesOfVendingMachine;
 import mate.rajnai.vendingmachine.inventory.Inventory;
 
 public interface VendingMachine {

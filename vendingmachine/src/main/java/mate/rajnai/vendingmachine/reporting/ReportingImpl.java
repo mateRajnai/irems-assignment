@@ -1,12 +1,15 @@
-package mate.rajnai.vendingmachine;
+package mate.rajnai.vendingmachine.reporting;
 
 import java.util.List;
+
+import mate.rajnai.vendingmachine.Product;
+import mate.rajnai.vendingmachine.VendingMachine;
 
 public class ReportingImpl implements Reporting {
 
 	private VendingMachine vendingMachine;
 	
-	ReportingImpl(VendingMachine vendingMachine) {
+	public ReportingImpl(VendingMachine vendingMachine) {
 		this.vendingMachine = vendingMachine;
 	}
 	
