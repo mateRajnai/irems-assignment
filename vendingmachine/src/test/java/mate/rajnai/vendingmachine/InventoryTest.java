@@ -82,6 +82,13 @@ class InventoryTest {
 		assertEquals(true, hasItem);
 	}
 	
+	@Test
+	void inventoryDoesNotHaveItemReturnsFalse() {
+		inventory.addItem(Coin.PENNY);
+		boolean hasItem = inventory.hasItem(Coin.DIME);
+		assertEquals(false, hasItem);
+	}
+	
 	
 	
 }
