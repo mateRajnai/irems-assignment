@@ -187,6 +187,15 @@ class VendingMachineImplTest {
 		assertEquals(expectedProucts, productAndCoinInventories.getProductInventory().getItems());
 	}
 	
+	@Test
+	void afterResetMachineConsumedProductsIsZero() {
+		vendingMachine.insertCoin(Coin.QUARTER);
+		Product product = Product.COKE;
+		vendingMachine.buyProductAndReturnChangesIfAny(product);
+		vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
+		assertEquals(new ArrayList<>(), vendingMachine.getConsumedProducts());
+	}
+	
 
 
 	
