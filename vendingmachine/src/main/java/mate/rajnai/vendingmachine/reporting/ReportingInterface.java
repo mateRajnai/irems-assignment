@@ -1,6 +1,6 @@
 package mate.rajnai.vendingmachine.reporting;
 
-public interface Reporting {
+public interface ReportingInterface {
 	
 	String reportConsumptionByProduct();
 
