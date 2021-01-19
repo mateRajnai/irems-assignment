@@ -81,9 +81,9 @@ public class VendingMachineImpl implements VendingMachine {
 	}
 
 	@Override
-	public Purchase reset() {
+	public InventoriesOfVendingMachine reset() {
 		this.insertedMoneyOfCurrentPurchase = 0;
-		return null;
+		return new InventoriesOfVendingMachine(this.availableProducts, this.availableCoins);
 	}
 	
 	
