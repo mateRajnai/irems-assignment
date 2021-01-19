@@ -102,6 +102,16 @@ class VendingMachineImplTest {
 	}
 	
 	@Test
+	void canNotBuyProductBecauseNotEnoughChange_throwsVendingMachineHasNotEnoughChangeException() {
+		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		assertThrows(VendingMachineHasNotEnoughChangeException.class, 
+				() -> vendingMachine.buyProductAndReturnChangesIfAny(product));
+	}
+	
+	@Test
 	void takeRefund() {
 		vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.insertCoin(Coin.QUARTER);
