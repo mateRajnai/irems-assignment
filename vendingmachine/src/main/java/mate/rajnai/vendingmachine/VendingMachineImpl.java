@@ -35,10 +35,41 @@ public class VendingMachineImpl implements VendingMachine {
 			throw new NotEnoughCoinIsInsertedException("Inserted coin is less than product's price!");
 		}
 		if(this.availableProducts.removeItem(product)) {
-			this.insertedMoneyOfCurrentPurchase = 0;
 			List<Coin> coinsToBeAddedToAvailableCoins = this.insertedCoinsOfCurrentPurchase.clearItems();
 			this.availableCoins.addItems(coinsToBeAddedToAvailableCoins);
-			return new Purchase(product, new ArrayList<Coin>());
+			
+			int changeAmount = insertedMoneyOfCurrentPurchase - product.getPrice();
+			List<Coin> coinsAsChange = new ArrayList<Coin>();
+			while (changeAmount > 0) {
+				if (changeAmount >= Coin.QUARTER.getValue() && this.availableCoins.hasItem(Coin.QUARTER)) {
+					this.availableCoins.removeItem(Coin.QUARTER);
+					coinsAsChange.add(Coin.QUARTER);
+					changeAmount -= Coin.QUARTER.getValue();
+					continue;
+				} else if (changeAmount >= Coin.DIME.getValue() && this.availableCoins.hasItem(Coin.DIME)) {
+					this.availableCoins.removeItem(Coin.DIME);
+					coinsAsChange.add(Coin.DIME);
+					changeAmount -= Coin.DIME.getValue();
+					continue;
+				} else if (changeAmount >= Coin.NICKEL.getValue() && this.availableCoins.hasItem(Coin.NICKEL)) {
+					this.availableCoins.removeItem(Coin.NICKEL);
+					coinsAsChange.add(Coin.NICKEL);
+					changeAmount -= Coin.NICKEL.getValue();
+					continue;
+				} else if (changeAmount >= Coin.PENNY.getValue() && this.availableCoins.hasItem(Coin.PENNY)) {
+					this.availableCoins.removeItem(Coin.PENNY);
+					coinsAsChange.add(Coin.PENNY);
+					changeAmount -= Coin.PENNY.getValue();
+					continue;
+				} else {
+					this.takeRefund();
+					throw new VendingMachineHasNotEnoughChangeException("Not enough change. You've got back your money. Please insert the exact amount of money and select your product again.");
+				}
+				
+			}
+			
+			this.insertedMoneyOfCurrentPurchase = 0;
+			return new Purchase(product, coinsAsChange);
 		}
 		else
 			throw new ProductIsOutOfRunException(product.getName() + " is out of run!");
