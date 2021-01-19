@@ -80,7 +80,7 @@ class VendingMachineImplTest {
 	}
 	
 	@Test
-	void afterBuyingProductAddAlsoToConsumedProducts() {
+	void afterBuyingProductAlsoAddToConsumedProducts() {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
