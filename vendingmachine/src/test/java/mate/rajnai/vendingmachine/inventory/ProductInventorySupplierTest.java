@@ -9,7 +9,6 @@ import mate.rajnai.vendingmachine.inventory.supplier.InventorySupplier;
 import mate.rajnai.vendingmachine.inventory.supplier.ProductInventorySupplier;
 
 class ProductInventorySupplierTest {
-	
 
 	@Test
 	void fillUp() {
@@ -18,5 +17,4 @@ class ProductInventorySupplierTest {
 		supplier.fillUp(inventory);
 		assertNotEquals(0, inventory.getItems().size());
 	}
-
 }
