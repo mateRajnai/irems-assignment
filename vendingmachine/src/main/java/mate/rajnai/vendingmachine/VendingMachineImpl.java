@@ -79,6 +79,12 @@ public class VendingMachineImpl implements VendingMachine {
 	public List<Coin> takeRefund() {
 		return this.insertedCoinsOfCurrentPurchase.clearItems();
 	}
+
+	@Override
+	public Purchase reset() {
+		this.insertedMoneyOfCurrentPurchase = 0;
+		return null;
+	}
 	
 	
 
