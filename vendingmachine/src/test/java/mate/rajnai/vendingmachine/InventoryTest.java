@@ -75,6 +75,13 @@ class InventoryTest {
 		assertEquals(2, otherInventory.getItems().size());
 	}
 	
+	@Test
+	void inventoryHasItemReturnsTrue() {
+		inventory.addItem(Coin.PENNY);
+		boolean hasItem = inventory.hasItem(Coin.PENNY);
+		assertEquals(true, hasItem);
+	}
+	
 	
 	
 }
