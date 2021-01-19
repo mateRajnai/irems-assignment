@@ -28,7 +28,7 @@ class VendingMachineImplTest {
 	@Test
 	void insertCoin_Penny() {
 		vendingMachine.insertCoin(Coin.PENNY);
-		int insertedMoneyOfCurrentPurchase = vendingMachine.getInsertedMoneyOfCurrentPurchase();
+		int insertedMoneyOfCurrentPurchase = vendingMachine.getAmountOfInsertedMoneyOfCurrentPurchase();
 		assertEquals(1, insertedMoneyOfCurrentPurchase);
 	}
 	
@@ -38,7 +38,7 @@ class VendingMachineImplTest {
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.insertCoin(Coin.QUARTER);
-		int insertedMoneyOfCurrentPurchase = vendingMachine.getInsertedMoneyOfCurrentPurchase();
+		int insertedMoneyOfCurrentPurchase = vendingMachine.getAmountOfInsertedMoneyOfCurrentPurchase();
 		assertEquals(41, insertedMoneyOfCurrentPurchase);
 	}
 	
@@ -75,7 +75,7 @@ class VendingMachineImplTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
-		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
+		int insertedMoney = vendingMachine.getAmountOfInsertedMoneyOfCurrentPurchase();
 		assertEquals(0, insertedMoney);
 	}
 	
@@ -134,7 +134,7 @@ class VendingMachineImplTest {
 	void afterResetInsertedMoneyOfCurrentPurchaseIsZero() {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
-		int insertedMoney = vendingMachine.getInsertedMoneyOfCurrentPurchase();
+		int insertedMoney = vendingMachine.getAmountOfInsertedMoneyOfCurrentPurchase();
 		assertEquals(0, insertedMoney);
 	}
 	
