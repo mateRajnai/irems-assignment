@@ -71,7 +71,7 @@ class VendingMachineImplTest {
 	}
 	
 	@Test
-	void afterBuyingProductInsertedMoneyOfCurrentPurchaseIsZero() {
+	void afterBuyingProductAmountOfInsertedMoneyOfCurrentPurchaseIsZero() {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Product product = Product.COKE;
 		vendingMachine.buyProductAndReturnChangesIfAny(product);
@@ -131,7 +131,7 @@ class VendingMachineImplTest {
 	}
 	
 	@Test
-	void afterResetInsertedMoneyOfCurrentPurchaseIsZero() {
+	void afterResetAmountOfInsertedMoneyOfCurrentPurchaseIsZero() {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.reset(new Inventory<Product>(), new Inventory<Coin>());
 		int insertedMoney = vendingMachine.getAmountOfInsertedMoneyOfCurrentPurchase();
