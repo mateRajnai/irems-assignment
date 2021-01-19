@@ -27,7 +27,7 @@ class InventoriesOfVendingMachineTest {
 	}
 
 	@Test
-	void testGetCoinInventory() {
+	void getCoinInventory() {
 		assertEquals(coinInventory, inventoriesOfVendingMachine.getCoinInventory());
 	}
 

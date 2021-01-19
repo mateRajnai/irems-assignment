@@ -7,7 +7,7 @@ import mate.rajnai.vendingmachine.VendingMachine;
 
 public class ReportingImpl implements ReportingInterface {
 
-	private VendingMachine vendingMachine;
+	private final VendingMachine vendingMachine;
 	
 	public ReportingImpl(VendingMachine vendingMachine) {
 		this.vendingMachine = vendingMachine;
@@ -27,6 +27,4 @@ public class ReportingImpl implements ReportingInterface {
 		}
 		return report;
 	}
-	
-
 }
