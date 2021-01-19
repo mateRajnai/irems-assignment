@@ -1,6 +1,7 @@
-package mate.rajnai.vendingmachine.inventory;
+package mate.rajnai.vendingmachine.inventory.supplier;
 
 import mate.rajnai.vendingmachine.Coin;
+import mate.rajnai.vendingmachine.inventory.Inventory;
 
 public class CoinInventorySupplier implements InventorySupplier<Coin> {
 

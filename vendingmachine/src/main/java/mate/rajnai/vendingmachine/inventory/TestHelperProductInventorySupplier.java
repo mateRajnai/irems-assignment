@@ -1,6 +1,7 @@
 package mate.rajnai.vendingmachine.inventory;
 
 import mate.rajnai.vendingmachine.Product;
+import mate.rajnai.vendingmachine.inventory.supplier.ProductInventorySupplier;
 
 public class TestHelperProductInventorySupplier extends ProductInventorySupplier {
 	

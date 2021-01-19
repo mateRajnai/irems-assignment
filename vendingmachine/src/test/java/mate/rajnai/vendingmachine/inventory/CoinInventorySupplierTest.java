@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import mate.rajnai.vendingmachine.Coin;
 import mate.rajnai.vendingmachine.Product;
+import mate.rajnai.vendingmachine.inventory.supplier.CoinInventorySupplier;
+import mate.rajnai.vendingmachine.inventory.supplier.InventorySupplier;
 
 class CoinInventorySupplierTest {
 

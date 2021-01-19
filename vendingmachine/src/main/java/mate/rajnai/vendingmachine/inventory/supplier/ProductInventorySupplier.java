@@ -1,6 +1,7 @@
-package mate.rajnai.vendingmachine.inventory;
+package mate.rajnai.vendingmachine.inventory.supplier;
 
 import mate.rajnai.vendingmachine.Product;
+import mate.rajnai.vendingmachine.inventory.Inventory;
 
 public class ProductInventorySupplier implements InventorySupplier<Product> {
 

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import mate.rajnai.vendingmachine.Product;
+import mate.rajnai.vendingmachine.inventory.supplier.InventorySupplier;
+import mate.rajnai.vendingmachine.inventory.supplier.ProductInventorySupplier;
 
 class ProductInventorySupplierTest {
 	
