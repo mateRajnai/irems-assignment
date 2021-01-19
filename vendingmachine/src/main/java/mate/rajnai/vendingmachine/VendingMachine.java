@@ -5,8 +5,8 @@ import java.util.List;
 import mate.rajnai.vendingmachine.inventory.Inventory;
 
 public interface VendingMachine {
-
-	int getInsertedMoneyOfCurrentPurchase();
+	
+	int getAmountOfInsertedMoneyOfCurrentPurchase();
 
 	void insertCoin(Coin coin);
 
