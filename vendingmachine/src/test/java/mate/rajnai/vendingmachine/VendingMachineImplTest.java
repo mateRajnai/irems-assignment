@@ -90,6 +90,18 @@ class VendingMachineImplTest {
 	}
 	
 	@Test
+	void canBuyProductAndTwoCoinsAreReturned() {
+		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.PENNY);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		Purchase purchase = vendingMachine.buyProductAndReturnChangesIfAny(product);
+		List<Coin> expectedChange = new ArrayList<Coin>(Arrays.asList(Coin.DIME, Coin.PENNY));
+		assertEquals(product, purchase.getProduct());
+		assertEquals(expectedChange, purchase.getChange());
+	}
+	
+	@Test
 	void takeRefund() {
 		vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.insertCoin(Coin.QUARTER);
