@@ -2,6 +2,7 @@ package mate.rajnai.vendingmachine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mate.rajnai.vendingmachine.inventory.Inventory;
 import mate.rajnai.vendingmachine.inventory.InventorySupplier;
@@ -11,34 +12,37 @@ public class VendingMachineImpl implements VendingMachine {
 	private Inventory<Product> availableProducts = new Inventory<Product>();
 	private Inventory<Coin> availableCoins = new Inventory<Coin>();
 	private Inventory<Coin> insertedCoinsOfCurrentPurchase = new Inventory<Coin>();
-	private int insertedMoneyOfCurrentPurchase;
 	
 	VendingMachineImpl(InventorySupplier<Product> productInventorySupplier, InventorySupplier<Coin> coinInventorySupplier) {
 		productInventorySupplier.fillUp(this.availableProducts);
 		coinInventorySupplier.fillUp(this.availableCoins);
 	}
 
-	@Override
-	public int getInsertedMoneyOfCurrentPurchase() {
-		return insertedMoneyOfCurrentPurchase;
-	}
 
 	@Override
 	public void insertCoin(Coin coin) {
-		this.insertedMoneyOfCurrentPurchase += coin.getValue();
 		this.insertedCoinsOfCurrentPurchase.addItem(coin);
+	}
+	
+	@Override
+	public int getAmountOfInsertedMoneyOfCurrentPurchase() {
+		 return Math.toIntExact(this.insertedCoinsOfCurrentPurchase
+				 .getItems()
+				 .stream()
+				 .map(item -> item.getValue())
+				 .collect(Collectors.summingInt(Integer::intValue)));
 	}
 
 	@Override
 	public Purchase buyProductAndReturnChangesIfAny(Product product) {
-		if (this.insertedMoneyOfCurrentPurchase < product.getPrice()) {
+		if (this.getAmountOfInsertedMoneyOfCurrentPurchase() < product.getPrice()) {
 			throw new NotEnoughCoinIsInsertedException("Inserted coin is less than product's price!");
 		}
 		if(this.availableProducts.removeItem(product)) {
+			int changeAmount = this.getAmountOfInsertedMoneyOfCurrentPurchase() - product.getPrice();
 			List<Coin> coinsToBeAddedToAvailableCoins = this.insertedCoinsOfCurrentPurchase.clearItems();
 			this.availableCoins.addItems(coinsToBeAddedToAvailableCoins);
 			
-			int changeAmount = insertedMoneyOfCurrentPurchase - product.getPrice();
 			List<Coin> coinsAsChange = new ArrayList<Coin>();
 			while (changeAmount > 0) {
 				if (changeAmount >= Coin.QUARTER.getValue() && this.availableCoins.hasItem(Coin.QUARTER)) {
@@ -68,7 +72,6 @@ public class VendingMachineImpl implements VendingMachine {
 				
 			}
 			
-			this.insertedMoneyOfCurrentPurchase = 0;
 			return new Purchase(product, coinsAsChange);
 		}
 		else
@@ -82,13 +85,10 @@ public class VendingMachineImpl implements VendingMachine {
 
 	@Override
 	public InventoriesOfVendingMachine reset(Inventory<Product> productInventory, Inventory<Coin> coinInventory) {
-		this.insertedMoneyOfCurrentPurchase = 0;
 		productInventory.addItems(this.availableProducts.clearItems());
 		coinInventory.addItems(this.availableCoins.clearItems());
 		coinInventory.addItems(this.insertedCoinsOfCurrentPurchase.clearItems());
 		return new InventoriesOfVendingMachine(productInventory, coinInventory);
 	}
 	
-	
-
 }
