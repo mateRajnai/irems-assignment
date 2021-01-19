@@ -4,6 +4,8 @@ package mate.rajnai.vendingmachine;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +43,7 @@ class VendingMachineImplTest {
 	
 	
 	@Test
-	void canBuyProductAndNoChangeHaveToBeReturned() {
+	void canBuyProductAndNoChangeHasToBeReturned() {
 		Product product = Product.COKE;
 		vendingMachine.insertCoin(Coin.QUARTER);
 		Purchase purchase = vendingMachine.buyProductAndReturnChangesIfAny(product);
@@ -76,7 +78,16 @@ class VendingMachineImplTest {
 		assertEquals(0, insertedMoney);
 	}
 	
-
+	@Test
+	void canBuyProductAndOneCoinIsReturned() {
+		Product product = Product.COKE;
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		Purchase purchase = vendingMachine.buyProductAndReturnChangesIfAny(product);
+		List<Coin> expectedChange = new ArrayList<Coin>(Arrays.asList(Coin.DIME));
+		assertEquals(product, purchase.getProduct());
+		assertEquals(expectedChange, purchase.getChange());
+	}
 	
 	@Test
 	void takeRefund() {
