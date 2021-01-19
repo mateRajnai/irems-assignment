@@ -88,7 +88,4 @@ class InventoryTest {
 		boolean hasItem = inventory.hasItem(Coin.DIME);
 		assertEquals(false, hasItem);
 	}
-	
-	
-	
 }
