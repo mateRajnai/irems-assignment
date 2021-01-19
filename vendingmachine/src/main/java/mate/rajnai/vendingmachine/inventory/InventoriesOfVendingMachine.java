@@ -20,6 +20,4 @@ public class InventoriesOfVendingMachine {
 	public Inventory<Coin> getCoinInventory() {
 		return this.coinInventory;
 	}
-	
-
 }

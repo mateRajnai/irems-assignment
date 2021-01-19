@@ -33,9 +33,10 @@ public class Inventory<T> {
 	}
 
 	public boolean hasItem(T t) {
-		return this.items.parallelStream().filter(item -> item.equals(t)).findFirst().isPresent();
+		return this.items
+				.stream()
+				.filter(item -> item.equals(t))
+				.findFirst()
+				.isPresent();
 	}
-	
-	
-	
 }
