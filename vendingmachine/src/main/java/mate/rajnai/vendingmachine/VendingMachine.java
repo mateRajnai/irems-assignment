@@ -16,4 +16,6 @@ public interface VendingMachine {
 
 	InventoriesOfVendingMachine reset(Inventory<Product> productInventory, Inventory<Coin> coinInventory);
 
+	List<Product> getConsumedProducts();
+
 }
